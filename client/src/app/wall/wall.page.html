@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item (click)="newpost()">
+        <ion-avatar slot="start">
+          <img [src]="currentUser?.get('avatar')?currentUser.get('avatar'):'assets/user.png'">
+        </ion-avatar>
+      <ion-input placeholder="En que estas pensando?" readonly></ion-input>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+  <ion-card *ngFor="let post of posts; let i = index">
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="post.get('user').get('avatar')?post.get('user').get('avatar'):'assets/user.png'">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{post.get('user').get('name')}}</h2>
+          <p>{{post.getDateFromNow('createdAt')}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="post-content">{{post.get('comment')}}</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" sizeMd="4" sizeXl="3" *ngFor="let image of post.get('images') | slice:0:4; let i = index">
+            <div class="miniature"  [style.background-image]="'url(' + image + ')'" (click)="showCarrousel(post.get('images'),i)"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <ion-item>
+      <ion-textarea placeholder="Escribe un comentario..." rows="1" autosize [(ngModel)]="newComments[i]"></ion-textarea>
+      <ion-button (click)="sendComment(post,i)" [disabled]="!newComments[i]"><ion-icon name="send"></ion-icon></ion-button>
+    </ion-item>
+    <ion-item *ngFor="let comment of comments[post.id] | slice:0:3;">
+      <ion-avatar slot="start">
+        <img [src]="comment.get('user').get('avatar')?comment.get('user').get('avatar'):'assets/user.png'">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h2>{{comment.get('user').get('name')}}</h2>
+        <p>{{comment.get('text')}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngIf="comments[post.id] && comments[post.id].length>3" (click)="showComments(post)">
+      <p>Ver todos los comentarios</p>
+    </ion-item>
+  </ion-card>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

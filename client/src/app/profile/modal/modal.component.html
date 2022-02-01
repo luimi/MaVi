@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{user?.get('name')}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="notification-bar"></div>
+  <img [src]="user?.get('avatar') && user?.get('avatar')?user.get('avatar'):'assets/user.png'"
+      class="avatar-profile">
+  <ion-item>
+    <ion-label>
+      <p>Nombre</p>
+      <h1>{{user?.get('name')}}</h1>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <p>Correo</p>
+      <h1>{{user?.get('email')}}</h1>
+    </ion-label>
+  </ion-item>
+  <div *ngFor="let field of fields">
+    <!-- TEXT and NUMBER-->
+    <ion-item *ngIf="field.type==='text' ||field.type==='number' ||field.type==='select' ||field.type==='radio'">
+      <ion-label>
+        <p>{{field.hint}}</p>
+        <h1>{{user?.get(field.field)}}</h1>
+      </ion-label>
+    </ion-item>
+    <!-- DATE-->
+    <ion-item *ngIf="field.type === 'date'">
+      <ion-label>
+        <p>{{field.hint}}</p>
+        <h1>{{user?.get(field.field) | date }}</h1>
+      </ion-label>
+    </ion-item>
+    <!-- CHECK -->
+    <ion-item *ngIf="field.type === 'check'">
+      <ion-label>
+        <p>{{field.hint}}</p>
+        <h1>{{user?.get(field.field)?'Si':'No'}}</h1>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

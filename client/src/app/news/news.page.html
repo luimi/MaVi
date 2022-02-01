@@ -1,0 +1,17 @@
+<ion-content>
+  <div class="notification-bar"></div>
+  <ion-list>
+    <ion-card *ngFor="let post of posts">
+      <ion-card-header>
+        <ion-card-subtitle>{{post.getDateFromNow('createdAt')}}</ion-card-subtitle>
+        <ion-card-title *ngIf="post.get('title')">{{post.get('title')}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <img [src]="post.get('mainPicture')" *ngIf="post.get('mainPicture')">
+        <quill-view [content]="post.get('content')" format="html" theme="snow" *ngIf="post.get('content')"></quill-view>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  
+</ion-content>

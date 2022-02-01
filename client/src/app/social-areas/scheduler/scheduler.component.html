@@ -1,0 +1,32 @@
+<ion-header>
+  
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="modalCtrl.dismiss();">
+      <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{area.get('name')}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-calendar (onDateChanged)="dateChanged($event)"></app-calendar>
+  <ion-item>
+    <ion-label>Hora de reserva</ion-label>
+    <ion-select placeholder="Selecciona la hora" cancelText="Cancelar" [(ngModel)]="selectedTime">
+      <ion-select-option *ngFor="let time of options" [value]="time">{{time}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button (click)="register()" expand="block">Reservar</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let schedule of scheduledArea">
+      <ion-avatar slot="start">
+        <img [src]="schedule.getUserAvatarUrl()">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{schedule.get('user')?.get('name')}}</h2>
+        <p>{{schedule.get('time')}}</p>
+      </ion-label>
+      <ion-button *ngIf="schedule.get('user').id === currentUser.id" slot="end" (click)="deleteScheduled(schedule)" ><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

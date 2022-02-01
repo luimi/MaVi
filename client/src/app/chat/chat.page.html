@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-searchbar slot="start"></ion-searchbar>
+      <ion-button slot="end" (click)="newChat()"><ion-icon name="add"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let chat of chats" (click)="openChat(chat)">
+      <ion-avatar slot="start">
+        <img [src]="chat.avatar?chat.avatar:'assets/user.png'">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{chat.title}}</h2>
+        <p>{{chat.chat.get('lastMessage')}}</p>
+      </ion-label>
+      <ion-button slot="end" *ngIf="chat.newMessages && chat.newMessages.length>0" color="danger">
+        {{chat.newMessages.length}}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

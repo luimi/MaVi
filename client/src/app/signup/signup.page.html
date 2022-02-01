@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="login"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+      <ion-label position="floating">Nombre Completo*</ion-label>
+      <ion-input [(ngModel)]="auth.name"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label position="floating">Correo*</ion-label>
+      <ion-input [(ngModel)]="auth.email"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label position="floating">Contraseña*</ion-label>
+      <ion-input [(ngModel)]="auth.password" type="password"></ion-input>
+  </ion-item>
+  <div *ngFor="let field of fields">
+    <!-- TEXT and NUMBER-->
+    <ion-item *ngIf="field.type==='text' ||field.type==='number'">
+        <ion-label position="floating">{{field.hint}}{{field.required?'*':''}}</ion-label>
+        <ion-input [(ngModel)]="auth[field.field]" [type]="field.type"></ion-input>
+    </ion-item>
+    <!-- DATE-->
+    <ion-item *ngIf="field.type === 'date'">
+      <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YY" [(ngModel)]="auth[field.field]"></ion-datetime>
+    </ion-item>
+    <!-- RADIO -->
+    <ion-radio-group [(ngModel)]="auth[field.field]" *ngIf="field.type === 'radio'">
+      <ion-list-header>
+        <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let option of field.options" >
+        <ion-label>{{option}}</ion-label>
+        <ion-radio slot="end" [value]="option"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <!-- CHECK -->
+    <ion-item *ngIf="field.type === 'check'">
+        <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="auth[field.field]"></ion-checkbox>
+    </ion-item>
+    <!-- SELECT -->
+    <ion-item *ngIf="field.type === 'select'">
+      <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      <ion-select placeholder="Selecciona una opcion" [(ngModel)]="auth[field.field]">
+        <ion-select-option [value]="option" *ngFor="let option of field.options">{{option}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <!-- -->
+  
+  <ion-button expand="block" (click)="signup()">Registrarse</ion-button>
+</ion-content>

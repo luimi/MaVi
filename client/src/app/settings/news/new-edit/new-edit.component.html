@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="modalCtrl.dismiss(false);">Cancelar</ion-button>
+      </ion-buttons>
+      <ion-title>Nueva noticia</ion-title>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-input placeholder="Titulo" [(ngModel)]="newsPost.title"></ion-input>
+  <div class="input-file-container">
+    <ion-button expand="block">Cargar Imagen principal</ion-button>
+    <input type="file" class="input-file" (change)="loadMainPicture($event)" >
+  </div>
+  <img [src]="newsPost.mainPicture" *ngIf="newsPost.mainPicture" (click)="removeMainPicture()">
+  <quill-editor [sanitize]="true" [(ngModel)]="newsPost.content" [modules]="config"></quill-editor>
+  <ion-button (click)="save()" expand="block" [disabled]="!newsPost.title && !newsPost.content && !newsPost.mainPicture">Publicar</ion-button>
+</ion-content>

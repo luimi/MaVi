@@ -1,0 +1,41 @@
+[
+    {
+        "hint":"Apartamento",
+        "field":"apartamento",
+        "type":"text",
+        "required":true,
+        "editable":true
+    },
+    {
+        "hint":"Telefono",
+        "field":"telefono",
+        "type":"number",
+        "required":true,
+        "editable":true
+    },
+    {
+        "hint":"Fecha de nacimiento",
+        "field":"fdn",
+        "type":"date",
+        "required":true
+    },
+    {
+        "hint":"Genero",
+        "field":"genero",
+        "type":"radio",
+        "options":["Masculino","Femenino"],
+        "required":true
+    },
+    {
+        "hint":"Es usted propietario?",
+        "field":"propietario",
+        "type":"check"
+    },
+    {
+        "hint":"Como te enteraste del app",
+        "field":"estadistica",
+        "type":"select",
+        "options":["Un amigo","Publicidad","Buscandola"],
+        "required":true
+    }
+]

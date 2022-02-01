@@ -1,0 +1,31 @@
+
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" (click)="modalCtrl.dismiss();">
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-buttons>
+      <ion-title>{{title}}</ion-title>
+      <ion-thumbnail slot="end">
+          <img [src]="avatar">
+      </ion-thumbnail>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let message of messages">
+      <ion-avatar slot="start">
+        <img [src]="message.get('from').get('avatar')?message.get('from').get('avatar'):'assets/user.png'">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <p>{{message.get('text')}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-textarea [(ngModel)]="newMessage"></ion-textarea>
+    <ion-button slot="end" (click)="send()" [disabled]="!newMessage"><ion-icon name="send"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-footer>

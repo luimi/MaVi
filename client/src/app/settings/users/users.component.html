@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="list" (click)="signUpFields()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar (ionChange)="search()" [(ngModel)]="searchText"></ion-searchbar>
+  <ion-segment (ionChange)="listChange($event)" [(ngModel)]="tab">
+    <ion-segment-button value="active">
+      <ion-label>Activos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pending">
+      <ion-label>Pendiente</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="banned">
+      <ion-label>Bloqueado</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start" (click)="openProfile(user)">
+        <img [src]="user.get('avatar')?user.get('avatar'):'assets/user.png'">
+      </ion-avatar>
+      <ion-label (click)="openProfile(user)">
+        <h2>{{user.get('name')}}</h2>
+        <h3>{{user.get('email')}}</h3>
+      </ion-label>
+      <ion-buttons slot="end" (click)="ban(user)" *ngIf="user.get('status')==='active'">
+        <ion-icon slot="icon-only" name="remove-circle-outline"></ion-icon>
+      </ion-buttons>
+      <ion-buttons slot="end" (click)="accept(user)" *ngIf="user.get('status')==='pending'">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="end" (click)="unban(user)" *ngIf="user.get('status')==='banned'">
+            <ion-icon slot="icon-only" name="unlock"></ion-icon>
+          </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

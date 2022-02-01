@@ -1,0 +1,12 @@
+<ion-content>
+</ion-content>
+<ion-footer class="ion-padding">
+  <ion-item>
+    <ion-input placeholder="Correo" [(ngModel)]="auth.email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input placeholder="Contraseña" [(ngModel)]="auth.password" type="password"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="login()">Login</ion-button>
+  <ion-button expand="block" routerLink="/signup">Registrarse</ion-button>
+</ion-footer>

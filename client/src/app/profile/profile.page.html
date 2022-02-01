@@ -1,0 +1,55 @@
+<ion-content class="ion-padding">
+  <div class="notification-bar"></div>
+  <div class="input-file-container">
+    <img [src]="user?.get('avatar')?user.get('avatar'):'assets/user.png'" class="avatar">
+    <input type="file" class="input-file" (change)="load($event)">
+  </div>
+  <ion-item>
+    <ion-label>
+      <p>Nombre</p>
+      <h1>{{user.get('name')}}</h1>
+    </ion-label>
+  </ion-item>
+  <div *ngFor="let field of fields">
+    <!-- TEXT and NUMBER-->
+    <ion-item *ngIf="(field.type==='text' ||field.type==='number') && field.editable">
+        <ion-label position="floating">{{field.hint}}{{field.required?'*':''}}</ion-label>
+        <ion-input [(ngModel)]="data[field.field]" [type]="field.type"></ion-input>
+    </ion-item>
+    <!-- DATE-->
+    <ion-item *ngIf="field.type === 'date' && field.editable">
+      <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YY" [(ngModel)]="data[field.field]"></ion-datetime>
+    </ion-item>
+    <!-- RADIO -->
+    <ion-radio-group [(ngModel)]="data[field.field]" *ngIf="field.type === 'radio' && field.editable">
+      <ion-list-header>
+        <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let option of field.options" >
+        <ion-label>{{option}}</ion-label>
+        <ion-radio slot="end" [value]="option"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <!-- CHECK -->
+    <ion-item *ngIf="field.type === 'check' && field.editable">
+        <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="data[field.field]"></ion-checkbox>
+    </ion-item>
+    <!-- SELECT -->
+    <ion-item *ngIf="field.type === 'select' && field.editable">
+      <ion-label>{{field.hint}}{{field.required?'*':''}}</ion-label>
+      <ion-select placeholder="Selecciona una opcion" [(ngModel)]="data[field.field]">
+        <ion-select-option [value]="option" *ngFor="let option of field.options">{{option}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <ion-button (click)="save()" expand="block">Guardar</ion-button>
+  <div class='onesignal-customlink-container'></div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <ion-button expand="block" color="danger" (click)="logOut()">Cerrar sesion</ion-button>
+  </ion-toolbar>
+</ion-footer>

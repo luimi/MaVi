@@ -1,0 +1,13 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button *ngFor="let module of modules | slice:0:(modules?.length>5?4:5);" [tab]="module.tab">
+      <ion-icon [name]="module.icon"></ion-icon>
+      <ion-label>{{module.title}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button *ngIf="modules?.length>5" (click)="more()">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+      <ion-label>Más</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

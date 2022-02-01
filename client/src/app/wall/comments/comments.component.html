@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start" (click)="modalCtrl.dismiss();">
+          <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-buttons>
+      <ion-title>Comentarios en la publicacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+      <ion-item *ngFor="let comment of comments">
+        <ion-avatar slot="start">
+          <img [src]="comment.get('user').get('avatar')?comment.get('user').get('avatar'):'assets/user.png'">
+        </ion-avatar>
+        <ion-label text-wrap>
+          <h2>{{comment.get('user').get('name')}}</h2>
+          <p>{{comment.get('text')}}</p>
+        </ion-label>
+      </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-item>
+      <ion-textarea placeholder="Escribe un comentario..." rows="1" autosize [(ngModel)]="newComment"></ion-textarea>
+      <ion-button (click)="sendComment()" [disabled]="!newComment"><ion-icon name="send" ></ion-icon></ion-button>
+    </ion-item>
+</ion-footer>

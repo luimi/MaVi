@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="currentUser?.get('avatar')?currentUser.get('avatar'):'assets/user.png'">
+        </ion-avatar>
+      <ion-textarea placeholder="En que estas pensando?" autosize [(ngModel)]="comment"></ion-textarea>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="input-file-container">
+    <ion-button expand="block">Cargar Imagenes</ion-button>
+    <input type="file" class="input-file" (change)="load($event)" multiple>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" sizeMd="4" sizeXl="3" *ngFor="let image of imagesToUpload; let i = index">
+        <div class="miniature"  [style.background-image]="'url(' + image + ')'" (click)="remove(i)"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+</ion-content>
+<ion-footer>
+  <ion-button expand="block" (click)="publish()" [disabled]="!comment && imagesToUpload.length===0">Publicar</ion-button>
+  <ion-button expand="block" (click)="cancel()" color="danger">Cancelar</ion-button>
+</ion-footer>

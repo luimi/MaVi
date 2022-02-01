@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+
+    <ion-title>Areas sociales</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar placeholder="Nombre del area" (ionChange)="search()" [(ngModel)]="searchText"></ion-searchbar>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="new()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item *ngFor="let area of areas">
+      <ion-thumbnail slot="start" (click)="edit(area)">
+        <img [src]="area.get('image')">
+      </ion-thumbnail>
+      <ion-label (click)="edit(area)">
+        <h2>{{area.get('name')}}</h2>
+      </ion-label>
+      <ion-icon slot="end" name="close" (click)="delete(area)"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -1,0 +1,26 @@
+[
+    {
+        "tab": "wall",
+        "icon": "apps",
+        "title": "Muro",
+        "status": true
+    },
+    {
+        "tab": "news",
+        "icon": "paper",
+        "title": "Noticias",
+        "status": true
+    },
+    {
+        "tab": "chat",
+        "icon": "chatboxes",
+        "title": "Chat",
+        "status": true
+    },
+    {
+        "tab": "areas",
+        "icon": "calendar",
+        "title": "Areas sociales",
+        "status": true
+    }
+]

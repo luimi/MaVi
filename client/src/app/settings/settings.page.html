@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+  <ion-button expand="block" *ngFor="let page of pages" (click)="open(page)">{{page.title}}</ion-button>
+  
+</ion-content>

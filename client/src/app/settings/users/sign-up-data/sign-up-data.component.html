@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+    <ion-title>Datos de registro</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="save" (click)="save()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-reorder-group>
+    <ion-card *ngFor="let param of fields; let i = index;trackBy:trackByIndex;">
+      <ion-card-header>
+        <ion-card-title>Campo #{{i+1}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Titulo</ion-label>
+          <ion-input [(ngModel)]="fields[i].hint"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre de campo</ion-label>
+          <ion-input [(ngModel)]="fields[i].field"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Tipo</ion-label>
+          <ion-select placeholder="Selecciona un tipo" [(ngModel)]="fields[i].type">
+            <ion-select-option value="text">Texto</ion-select-option>
+            <ion-select-option value="number">Numero</ion-select-option>
+            <ion-select-option value="date">Fecha</ion-select-option>
+            <ion-select-option value="check">Check</ion-select-option>
+            <ion-select-option value="radio">Radio</ion-select-option>
+            <ion-select-option value="select">Combo</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div *ngIf="fields[i].type === 'radio' || fields[i].type === 'select'">
+          <ion-reorder-group disabled="false" (ionItemReorder)="$event.detail.complete(fields[i].options)">
+            <ion-item *ngFor="let option of param.options; let j = index;trackBy:trackByIndex;">
+              <ion-reorder slot="start"></ion-reorder>
+              <ion-input [(ngModel)]="fields[i].options[j]"></ion-input>
+              <ion-icon slot="end" name="close" (click)="fields[i].options.splice(j,1)"></ion-icon>
+            </ion-item>
+
+          </ion-reorder-group>
+          <ion-button expand="block" (click)="fields[i].options.push('')">Agregar Opcion</ion-button>
+        </div>
+
+        <ion-item>
+          <ion-label>Requerido</ion-label>
+          <ion-checkbox color="primary" checked slot="start" [(ngModel)]="fields[i].required"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modificable</ion-label>
+          <ion-checkbox color="primary" checked slot="start" [(ngModel)]="fields[i].editable"></ion-checkbox>
+        </ion-item>
+        <ion-button expand="block" (click)="fields.splice(i,1)" color="danger">Quitar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-reorder-group>
+  <ion-button expand="block" (click)="fields.push({options:[]})">Agregar</ion-button>
+</ion-content>

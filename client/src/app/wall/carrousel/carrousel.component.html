@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-button class="close-btn" fill="outline" color="light" (click)="modalCtrl.dismiss();">
+      <ion-icon name="close"></ion-icon>
+  </ion-button>
+  
+  <ion-slides pager="true" [options]="slideOpts" #slider>
+    <ion-slide *ngFor="let image of images">
+      <div class="swiper-zoom-container">
+        <img [src]="image">
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

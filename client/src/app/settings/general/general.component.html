@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+    <ion-title>General</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list-header>
+    <ion-label>Modulos</ion-label>
+  </ion-list-header>
+  <ion-reorder-group disabled="false" (ionItemReorder)="$event.detail.complete(modules);save()">
+    <ion-item *ngFor="let module of modules">
+      <ion-reorder slot="start"></ion-reorder>
+      <ion-label>
+        {{module.title}}
+      </ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="module.status" (ionChange)="save()"></ion-checkbox>
+    </ion-item>
+  </ion-reorder-group>
+</ion-content>

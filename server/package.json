@@ -1,0 +1,17 @@
+{
+  "name": "mavi",
+  "version": "1.0.0",
+  "description": "mavi server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "lui2mi",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^1.27.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.16.4",
+    "parse-server": "^3.3.0"
+  }
+}
