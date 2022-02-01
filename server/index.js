@@ -10,7 +10,7 @@ var api = new ParseServer({
   appId: process.env.APPID,
   masterKey: process.env.MASTERKEY,
   javascriptKey:process.env.JSKEY,
-  serverURL: `${process.env.URL}:${process.env.PORT}/parse`,
+  serverURL: `${process.env.URL}`,
   liveQuery: {
     classNames: ['WallPostComment','ChatMessage'],
   }

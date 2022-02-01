@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   appId: "FYKbM878IIpCAYCDSvaWGJtyMyhEs2NTqFYsRq3O",
   jsId:"BvwN1CQNSw9GVesIC2DhQhuzdwfx89shsAwIoX3Q",
-  server:"http://localhost:1337/parse"
+  server:"https://mavi-production.up.railway.app/parse"
 };
 
 /*
