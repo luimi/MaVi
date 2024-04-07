@@ -4,9 +4,6 @@
 
 export const environment = {
   production: false,
-  appId: "X8uS5dUIRf5DgrdAwq6ssXFwLlcEihcq",
-  jsId:"JmCowtKNT6H4U23MIEw1QiEL9sicfM3N",
-  server:"https://site--mavi-newport--mcg4scqc2r6n.code.run/parse"
 };
 
 /*

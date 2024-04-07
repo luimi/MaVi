@@ -8,7 +8,8 @@ import {environment} from '../environments/environment';
 })
 export class AppComponent {
   constructor() {
-    Parse.initialize(environment.appId, environment.jsId);
-    Parse.serverURL = environment.server;
+    const env = import.meta.env
+    Parse.initialize(env.NG_APP_APPID,env.NG_APP_JSKEY);
+    Parse.serverURL = env.NG_APP_SERVER;
   }
 }
