@@ -4,7 +4,8 @@
   "description": "mavi server",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dashboard": "parse-dashboard --config dashboard.json"
   },
   "author": "lui2mi",
   "license": "ISC",
