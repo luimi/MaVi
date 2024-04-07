@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  appId: "FYKbM878IIpCAYCDSvaWGJtyMyhEs2NTqFYsRq3O",
-  jsId:"BvwN1CQNSw9GVesIC2DhQhuzdwfx89shsAwIoX3Q",
-  server:"https://lui2mi-mavi.glitch.me/parse"
+  appId: "X8uS5dUIRf5DgrdAwq6ssXFwLlcEihcq",
+  jsId:"JmCowtKNT6H4U23MIEw1QiEL9sicfM3N",
+  server:"https://site--mavi-newport--mcg4scqc2r6n.code.run/parse"
 };
 
 /*
