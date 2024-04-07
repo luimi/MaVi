@@ -1,22 +1,13 @@
-FROM node:12-alpine
+FROM node:18-alpine
 
-WORKDIR /opt/app
+WORKDIR /usr/src/app
 
-ENV PORT=80
+COPY package*.json ./
 
-# daemon for cron jobs
-RUN echo 'crond' > /boot.sh
-# RUN echo 'crontab .openode.cron' >> /boot.sh
+RUN npm install
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+COPY . .
 
-COPY server/package*.json ./
+EXPOSE 1337
 
-RUN npm install --production
-
-# Bundle app source
-COPY server/ .
-
-CMD sh /boot.sh && npm start
+CMD [ "node", "index.js" ]
